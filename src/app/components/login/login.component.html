@@ -1,0 +1,35 @@
+<mat-toolbar color="primary">
+    <span>My Social App</span>
+  </mat-toolbar>
+  
+  <div class="login-container">
+    <h2 *ngIf="!isSignUpMode">Login</h2>
+    <h2 *ngIf="isSignUpMode">Sign Up</h2>
+    
+    <mat-form-field class="input-field" appearance="fill">
+      <input matInput placeholder="Username" [(ngModel)]="username">
+    </mat-form-field>
+    
+    <mat-form-field class="input-field" appearance="fill">
+      <input matInput type="password" placeholder="Password" [(ngModel)]="password">
+    </mat-form-field>
+
+    <mat-form-field *ngIf="isSignUpMode" class="input-field" appearance="fill">
+        <input matInput type="name" placeholder="Name" [(ngModel)]="name">
+      </mat-form-field>
+  
+    <button mat-raised-button color="primary" *ngIf="!isSignUpMode" (click)="login()">Login</button>
+    <button mat-raised-button color="accent" *ngIf="isSignUpMode" (click)="signUp()">Sign Up</button>
+  
+    <button mat-button (click)="toggleSignUpMode()">
+      {{ isSignUpMode ? 'Already have an account? Login' : 'Don\'t have an account? Sign Up' }}
+    </button>
+  
+    <!-- Display error or success message -->
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+    <div *ngIf="successMessage" class="success-message">
+      {{ successMessage }}
+    </div>
+  </div>

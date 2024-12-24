@@ -1,0 +1,33 @@
+<mat-toolbar color="primary">
+  <span>Feed</span>
+  <span class="spacer"></span>
+  <button mat-raised-button color="accent" (click)="goToProfile()">Go to Profile</button>
+</mat-toolbar>
+
+<div class="feed-container">
+  <div *ngFor="let post of feedPosts" class="post-card">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{ post.name }}</mat-card-title>
+        <mat-card-subtitle>{{ post.timestamp | date:'short' }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ post.content }}</p>
+        <img *ngIf="post.mediaUrl" [src]="post.mediaUrl" alt="Post media" class="post-media">
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button (click)="likePost(post)">Like ({{ post.likes }})</button>
+        <button mat-button (click)="toggleComments(post)">Comments ({{ post.comments.length }})</button>
+      </mat-card-actions>
+      <mat-card-content *ngIf="post.showComments">
+        <div *ngFor="let comment of post.comments" class="comment">
+          <p>{{ comment }}</p>
+        </div>
+        <mat-form-field class="comment-input">
+          <input matInput placeholder="Add a comment" [(ngModel)]="newComment">
+        </mat-form-field>
+        <button mat-button (click)="addComment(post, newComment)">Add Comment</button>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

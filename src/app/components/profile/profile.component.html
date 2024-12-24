@@ -1,0 +1,46 @@
+<mat-toolbar color="primary">
+  <span>My Profile</span>
+  <span class="spacer"></span>
+  <button mat-button color="accent" (click)="goToFeed()">Go to Feed</button>
+</mat-toolbar>
+
+<div class="profile-container">
+  <h2>Welcome to your profile, {{ user.name }}!</h2>
+
+  <!-- Post form -->
+  <mat-card class="new-post-card">
+    <mat-card-header>
+      <mat-card-title>New Post</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field class="input-field" appearance="fill">
+        <textarea matInput placeholder="What's on your mind?" [(ngModel)]="newPost.content"></textarea>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="addPost()">Post</button>
+    </mat-card-actions>
+  </mat-card>
+
+  <!-- Post history -->
+  <h3>Your Posts</h3>
+  <div *ngFor="let post of posts" class="post-card">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{ post.content }}</mat-card-title>
+        <mat-card-subtitle>{{ post.timestamp | date:'short' }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ post.content }}</p>
+       </mat-card-content>
+     
+      
+    </mat-card>
+  </div>
+
+  <!-- Following list -->
+  <h3>Following</h3>
+  <mat-list>
+    <mat-list-item *ngFor="let user of followingList">{{ user }}</mat-list-item>
+  </mat-list>
+</div>
