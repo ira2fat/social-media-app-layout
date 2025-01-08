@@ -14,9 +14,11 @@
 
 .post-media {
   width: 100%;
+  height: auto;
   max-height: 400px;
-  object-fit: cover;
+  object-fit: contain;
   margin-top: 10px;
+  aspect-ratio: 16/9;
 }
 
 .comment {

@@ -17,10 +17,11 @@
     <mat-form-field *ngIf="isSignUpMode" class="input-field" appearance="fill">
         <input matInput type="name" placeholder="Name" [(ngModel)]="name">
       </mat-form-field>
-  
-    <button mat-raised-button color="primary" *ngIf="!isSignUpMode" (click)="login()">Login</button>
-    <button mat-raised-button color="accent" *ngIf="isSignUpMode" (click)="signUp()">Sign Up</button>
-  
+      @if (!isSignUpMode) {<button mat-raised-button color="primary"  (click)="login()">Login</button>}
+      @else {
+        <button mat-raised-button color="primary"  (click)="signUp()">Sign Up</button>
+       }
+
     <button mat-button (click)="toggleSignUpMode()">
       {{ isSignUpMode ? 'Already have an account? Login' : 'Don\'t have an account? Sign Up' }}
     </button>

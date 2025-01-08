@@ -9,12 +9,14 @@ import { Router } from '@angular/router';
 import { PostService } from '../../services/post.service';
 import { MatListModule } from '@angular/material/list';
 import { Post, User } from '../../services/mock.backend.service';
+import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
 
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule, MatCardModule,MatFormFieldModule,FormsModule, MatToolbarModule, MatListModule],
+  imports: [CommonModule, MatCardModule,MatFormFieldModule,FormsModule, MatToolbarModule, MatListModule, MatInputModule,MatButtonModule ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PostService } from '../../services/post.service';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -8,18 +8,23 @@ import {MatListModule} from '@angular/material/list';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Post } from '../../services/mock.backend.service';
+import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
+import { Subject, takeUntil } from 'rxjs';
 
 
 @Component({
   selector: 'app-feed',
   standalone: true,
-  imports: [CommonModule,MatCardModule, MatFormFieldModule, MatToolbarModule, MatListModule,FormsModule],
+  imports: [CommonModule,MatCardModule, MatFormFieldModule, MatToolbarModule, MatListModule,FormsModule, MatInputModule, MatButtonModule],
   templateUrl: './feed.component.html',
   styleUrl: './feed.component.css'
 })
-export class FeedComponent {
+export class FeedComponent implements OnInit, OnDestroy {
   newComment: string = '';
   feedPosts: Post[] = [];
+  private destroy$ = new Subject<void>();
+
   constructor(private postService: PostService, private router:Router) {}
   
 
@@ -27,11 +32,10 @@ export class FeedComponent {
 
   ngOnInit(): void {
     this.loadFeedPosts();
-    console.log(this.feedPosts);
   }
 
   loadFeedPosts():void{
-    this.postService.getPosts().subscribe(posts=>{
+    this.postService.getPosts().pipe(takeUntil(this.destroy$)).subscribe(posts=>{
       this.feedPosts=posts;
     });
    }
@@ -66,5 +70,9 @@ export class FeedComponent {
   }
   goToProfile(){
     this.router.navigate(['/profile']);
+  }
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+
 
 export interface User {
   username: string;
@@ -34,6 +36,7 @@ export class MockBackendService {
               id: 1,
               name:'John Doe',
               content: 'Hello, this is my first post!',
+              mediaUrl: 'https://cdn.pixabay.com/photo/2017/01/31/08/42/comic-characters-2023311_1280.png',
               likes: 10,
               comments: ['Nice post!', 'Welcome!'],
               showComments: true,
@@ -43,6 +46,7 @@ export class MockBackendService {
               id: 2,
               name:'John Doe',
               content: 'Enjoying a sunny day at the beach.',
+              mediaUrl:'https://media.istockphoto.com/id/1650432284/de/foto/sandd%C3%BCne-und-strand-bei-spiekeroog-ostfriesische-insel-deutschland.jpg?s=1024x1024&w=is&k=20&c=LLrT2-Z_lG8CCWg0keS6MoaLJF8E-Ml94lNJtvzufTM=',
               likes: 20,
               comments: ['Looks fun!', 'Wish I was there!'],
               showComments: true,
